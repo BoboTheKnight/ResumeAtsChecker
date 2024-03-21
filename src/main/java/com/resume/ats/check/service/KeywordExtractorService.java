@@ -92,7 +92,7 @@ public class KeywordExtractorService {
 			token = token.replace("/", " ").trim().toLowerCase();
 			if (!stopWords.contains(token)) {
 				String[] wordsSplit = token.split(" ");
-				Stream.of(wordsSplit).forEach(word ->
+				Stream.of(wordsSplit).filter(ele-> !"".equals(ele)).forEach(word ->
 						wordFrequencies.merge(word, 1, Integer::sum)
 				);
 			}
@@ -100,6 +100,8 @@ public class KeywordExtractorService {
 
 		return wordFrequencies.entrySet().stream()
 				.sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
-				.collect(LinkedHashMap::new, (map, entry) -> map.put(entry.getKey(), entry.getValue()), LinkedHashMap::putAll);
+				.collect(
+						LinkedHashMap::new, (map, entry) -> map.put(entry.getKey(), entry.getValue()), LinkedHashMap::putAll
+				);
 	}
 }
