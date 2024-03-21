@@ -4,10 +4,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Stream;
 
 import org.apache.commons.io.IOUtils;
 import org.springframework.stereotype.Service;
@@ -37,9 +35,7 @@ public class KeywordExtractorService {
 		stopWords = loadStopWords();
 	}
 
-	public Set<String> extractKeywords(String inputText){
-
-		Set<String> keywords = new LinkedHashSet<>();
+	public Map<String, Integer> extractKeywords(String inputText){
 
 		// Tokenize input text
 		String[] tokens = tokenizeInputText(inputText, tokenizer);
@@ -48,9 +44,7 @@ public class KeywordExtractorService {
 		String[] posTags = tagPartsOfSpeech(tokens, posTagger);
 
 		// Extract keywords based on relevant parts of speech
-		extractKeywordsFromPartsOfSpeech(tokens, posTags, stopWords, keywords);
-
-		return keywords;
+		return extractKeywordsFromPartsOfSpeech(tokens, posTags, stopWords);
 	}
 
 	private static Tokenizer loadTokenizer() throws IOException {
@@ -81,28 +75,31 @@ public class KeywordExtractorService {
 		return posTagger.tag(tokens);
 	}
 
-	private void extractKeywordsFromPartsOfSpeech(String[] tokens, String[] posTags, List<String> stopWords, Set<String> keywords) {
+	private Map<String, Integer> extractKeywordsFromPartsOfSpeech(String[] tokens, String[] posTags, List<String> stopWords) {
+		Map<String, Integer> wordFrequencies = new HashMap<>(tokens.length);
 		for (int i = 0; i < tokens.length; i++) {
 			String token = tokens[i];
 			String posTag = posTags[i];
-			if (posTag.startsWith("N") || posTag.startsWith("J")) {
-				// Consider only nouns and adjectives
-				if (token.matches(".*\\[.*\\].*")) {
-					// Remove any parts-of-speech tags from token
-					token = token.replaceAll("\\[.*\\]", "");
-				}
-
-				if (token.contains("/")) {
-					String[] wordsSplit = token.split("/");
-					keywords.addAll(Arrays.asList(wordsSplit));
-				} else {
-					token = token.replaceAll("[^a-zA-Z0-9]", " ").trim();
-					token = token.toLowerCase();
-					if (!stopWords.contains(token)) {
-						keywords.addAll(Arrays.asList(token.split(" ")));
-					}
-				}
+			// Consider only nouns and adjectives
+			if (!posTag.startsWith("N") && !posTag.startsWith("J")) {
+				continue;
+			}
+			if (token.matches(".-*\\[.*\\].*")) {
+				// Remove any parts-of-speech tags from token
+				token = token.replaceAll("-\\[.*\\]", "");
+			}
+			token = token.replaceAll("[^a-zA-Z0-9]", " ").trim().toLowerCase();
+			token = token.replace("/", " ").trim().toLowerCase();
+			if (!stopWords.contains(token)) {
+				String[] wordsSplit = token.split(" ");
+				Stream.of(wordsSplit).forEach(word ->
+						wordFrequencies.merge(word, 1, Integer::sum)
+				);
 			}
 		}
+
+		return wordFrequencies.entrySet().stream()
+				.sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+				.collect(LinkedHashMap::new, (map, entry) -> map.put(entry.getKey(), entry.getValue()), LinkedHashMap::putAll);
 	}
 }
