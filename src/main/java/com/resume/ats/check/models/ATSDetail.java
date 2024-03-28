@@ -16,6 +16,4 @@ public class ATSDetail {
 	private Map<String, Integer> unMatchedKeywords;
 	private String matchPercentage;
 
-	public ATSDetail(Map<String, Integer> descKeywords, Map<String, Integer> unmatched, double percentage) {
-	}
 }

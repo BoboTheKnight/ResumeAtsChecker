@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" monitorInterval="60">
+    <Properties>
+        <Property name="TriggerSize" value="100MB"/>
+        <Property name="imFlush" value="true"/>
+        <Property name="projectName" value="resume-ats-checker"/>
+        <Property name="P_Layout" value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%t] %-5level %logger{36}(%F:%L) - %msg%n"/>
+    </Properties>
+
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${P_Layout}"/>
+        </Console>
+        <RollingFile name="LocalLog" immediateFlush="${imFlush}" fileName="logs/${projectName}.log"
+                     filePattern="logs/${projectName}-%d{yyyy-MM-dd HH:mm:ss}.log.gz">
+            <PatternLayout pattern="${P_Layout}"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="${TriggerSize}"/>
+                <CronTriggeringPolicy schedule="0 0 0 * * ?" evaluateOnStartup="true"/>
+            </Policies>
+            <DefaultRolloverStrategy max="10"/>
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+        <Logger name="local.log" level="info" includeLocation="true" additivity="false">
+            <AppenderRef ref="LocalLog"/>
+        </Logger>
+        <Root level="warn" includeLocation="true">
+            <AppenderRef ref="Console"/>
+        </Root>
+    </Loggers>
+</Configuration>
