@@ -41,7 +41,7 @@ public class DiscoverService {
                 if(chunkPosMap.containsKey(chunkTag)){
                     logger.warn("Token ({}) chunkTag ({}) has conflict posTag: {}, new posTag is:{}", token, chunkTag, chunkPosMap.get(chunkTag), posTag);
                 }
-                chunkPosMap.put(chunkTag, pobsTag);
+                chunkPosMap.put(chunkTag, posTag);
                 map.put(token, chunkPosMap);
             }
         }
