@@ -1,0 +1,44 @@
+# Social Skills, Interpersonal skills:
+Communication,Active listening,Empathy,Service Orientation,Customer service,Emotional intelligence,Patience,Verbal communication,Written communication,Written and oral communication
+Idea exchange,Mediation,Coordination
+Diversity,Inclusion,Cultural intelligence,Cultural competence,Cultural awareness
+Leadership,Mentor,Mentorship,Coach,Instructing,Task delegation,
+Organization,Time management,Goal-setting,Stress management,Prioritizing,Planning,,Scheduling,Team building
+Share,Altruism,Generosity
+Collaboration,Teamwork,Conflict resolution,Conflict management
+Constructive feedback,Introspection
+Negotiation,Persuasion,Presentation,Assertiveness,Confidence
+Intercultural communication,Interpersonal communication
+Networking,Humor,Tolerance,Diplomacy
+Open-mindedness,open-minded
+Accountability
+
+# Work Skills:
+Judgment,Decision-making,Critical thinking,Strategic thinking
+
+Active Learning,Continuous Learning,Learning agility,Curiosity
+
+Innovation,Creativity,Imagination,Mind-mapping
+Experimentation,Questioning,Acuity
+
+Problem-solving,Identifying complex problems,Problem analysis,AnalysisLogical reasoning,Observation,Critical observation
+Deductive reasoning,Research
+Attention to detail
+Multitasking,Project management
+Risk management,Risk-taking
+
+# Responsibility:
+
+Responsibility,Professionalism,Commitment,Dependability,Honesty,Discipline,Trustworthiness,Dependability,positive ethic,Work ethic,Consistency
+Deadline
+high quality standards,
+Resilience,Adaptability,Flexibility,Versatility
+Positive attitude,Initiative,Self-motivation,Self-management
+Persistence
+
+# Character
+Integrity
+Enthusiasm,Positive attitude,Optimism,Positivity
+Humility,Accepting criticism,Openness to criticism,Constructive feedback
+Resourcefulness,Versatility
+Resilience,Adaptability,Flexibility,
