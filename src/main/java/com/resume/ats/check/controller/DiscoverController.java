@@ -2,6 +2,7 @@ package com.resume.ats.check.controller;
 
 import com.resume.ats.check.models.Dimension;
 import com.resume.ats.check.service.DiscoverService;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,6 +33,10 @@ public class DiscoverController {
     @PostMapping("dimension")
     public Dimension discoverByDimension(@RequestParam String text) {
         return discoverService.discoverByDimension(text);
+    }
+    @PostMapping("phrase")
+    public List<String> discoverPhrases(@RequestParam String text) {
+        return discoverService.discoverIncludingPhrases(text);
     }
 
 }
