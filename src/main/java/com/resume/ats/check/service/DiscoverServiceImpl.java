@@ -119,7 +119,7 @@ public class DiscoverServiceImpl implements DiscoverService {
             i++;
         }
         if(!sb.isEmpty()){
-            phrases.add(sb.substring(0,sb.length()-1).toString());
+            phrases.add(sb.substring(0, sb.length()-1));
         }
         return i;
     }

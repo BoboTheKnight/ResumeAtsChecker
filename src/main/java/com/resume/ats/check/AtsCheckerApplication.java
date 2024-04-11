@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class AtsCheckerApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(AtsCheckerApplication.class, args);
+			SpringApplication.run(AtsCheckerApplication.class, args);
 	}
 
 }

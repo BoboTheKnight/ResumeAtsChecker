@@ -30,10 +30,12 @@ public class DiscoverController {
     public Map<String, Map<String, String>> discoverByInput(@RequestParam String text) {
         return discoverService.discoverByInput(text);
     }
+
     @PostMapping("dimension")
     public Dimension discoverByDimension(@RequestParam String text) {
         return discoverService.discoverByDimension(text);
     }
+
     @PostMapping("phrase")
     public List<String> discoverPhrases(@RequestParam String text) {
         return discoverService.discoverIncludingPhrases(text);
